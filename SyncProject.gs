@@ -355,7 +355,6 @@ function newTogglProjectwithClient(project,cid){
   var token = vg_tokenOfToggl;
   var token64 = Utilities.base64Encode(token);
   var auth = 'Basic ' + token64;
-  var email = 'skusunoki@gmail.com';
   var name = project;
   var wip = vg_wipOfToggl;
   var client = new Number(cid);
@@ -401,7 +400,6 @@ function newTogglProject(project){
   var token = vg_tokenOfToggl;
   var token64 = Utilities.base64Encode(token);
   var auth = 'Basic ' + token64;
-  var email = 'skusunoki@gmail.com';
   var name = project;
   var wip = vg_wipOfToggl;
   var is_private = true;
@@ -441,60 +439,6 @@ function newTogglProject(project){
 }
 
 
-function slack(message) {
-    // 各所必要な項目をセットします
-    var url        = 'https://slack.com/api/chat.postMessage';
-    var token      = vg_tokenOfSlack;
-    var channel    = '#general';
-    var text       = message;
-    // お好みのBOT名を指定できます
-    var username   = 'New Project Created';
-    var parse      = 'full';
-    // お好みのアイコン(絵文字)を指定できます
-    var icon_emoji = ':cat:';
-    var method     = 'post';
- 
-    var payload = {
-        'token'      : token,
-        'channel'    : channel,
-        'text'       : text,
-        'username'   : username,
-        'parse'      : parse,
-        'icon_emoji' : icon_emoji
-    };
- 
-    var params = {
-        'method' : method,
-        'payload' : payload
-    };
- 
-    var response = UrlFetchApp.fetch(url, params);
-}
-
-//function createNozbeAuth(){
-//  // 各所必要な項目をセットします
-//  var url        = 'https://api.nozbe.com:3000/oauth/secret/create';
-//  var email      = 'skusunoki@gmail.com';
-//  var password    = 'goahead';
-//  var redirect_uri = 'https://docs.google.com/spreadsheets/u/0/';
-//  var method = 'post';
-//
-//  var payload = {
-//    'email'      : email,
-//    'password'    : password,
-//    'redirect_uri'       : redirect_uri
-//  };
-//  
-//  var params = {
-//    'method' : method,
-//    'payload' : payload
-//  };
-//  
-//  var response = UrlFetchApp.fetch(url, params);  
-//  
-//}
-
-
 function getNozbeProjects(){
   var url        = 'https://api.nozbe.com:3000/list';
   var access_token = vg_tokenOfNozbe;
@@ -525,7 +469,6 @@ function getTogglProjects(){
   var token = vg_tokenOfToggl;
   var token64 = Utilities.base64Encode(token);
   var auth = 'Basic ' + token64;
-  var email = 'skusunoki@gmail.com';
   var wip = vg_wipOfToggl;
   var is_private = true;
   var billable = true;
@@ -558,7 +501,6 @@ function getTogglClients(){
   var token = vg_tokenOfToggl;
   var token64 = Utilities.base64Encode(token);
   var auth = 'Basic ' + token64;
-  var email = 'skusunoki@gmail.com';
   var wip = vg_wipOfToggl;
   var is_private = true;
   var billable = true;
@@ -597,7 +539,6 @@ function archiveTogglProjectJSON(ProjectID){
   var token = vg_tokenOfToggl;
   var token64 = Utilities.base64Encode(token);
   var auth = 'Basic ' + token64;
-  var email = 'skusunoki@gmail.com';
   var wip = vg_wipOfToggl;
   var active = false;
   var method = 'put';
