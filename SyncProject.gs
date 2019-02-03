@@ -13,6 +13,7 @@ function myFunction() {
 
   updateTogglforNew();
   updateTogglforCompleted();
+  
 }
 
 function defineGlobalVariables(){
@@ -76,6 +77,9 @@ function updateTogglforNew(){
   
 }
 
+function createFileInGoogleDrive(){
+}
+
 
 function updateTogglforCompleted(){
   var ss = SpreadsheetApp.openById(SpreadsheetApp.getActiveSpreadsheet().getId());
@@ -99,8 +103,10 @@ function updateTogglforCompleted(){
     if ( val_TogglProjectIDs[i][0] != '' && val_TogglCompleted[i][0] != true && val_NozbeCompleted[i][0] == true ){
       Logger.log(i);
       var ret = archiveTogglProject(val_TogglProjectIDs[i][0]);
-      if (ret.data.id != undefined ){
-        val_TogglCompleted[i][0] = true;
+      if (ret != null){
+        if (ret.data.id != undefined ){
+          val_TogglCompleted[i][0] = true;
+        }
       }
     }
   }
@@ -528,11 +534,16 @@ function getTogglClients(){
 }
 
 function archiveTogglProject(ProjectID){
-  var ret = JSON.parse(archiveTogglProjectJSON(ProjectID));
+  try {
+    var ret = JSON.parse(archiveTogglProjectJSON(ProjectID));
+  } catch (e) {
+    var ret = null;
+  }
   Logger.log(ret);
   return ret;
 }
 
+ 
 function archiveTogglProjectJSON(ProjectID){
     
   var url = 'https://www.toggl.com/api/v8/projects';
@@ -557,7 +568,6 @@ function archiveTogglProjectJSON(ProjectID){
     'project' : projectdata
   };
   
-  
   var params = {
     'method' : method,
     'contentType' : contenttype,
@@ -566,11 +576,13 @@ function archiveTogglProjectJSON(ProjectID){
     'muteHttpExceptions' : muteHttpExceptions
   };
 
+  Logger.log(params);
+  Logger.log(url);
   
   var response = UrlFetchApp.fetch(url, params);
   Logger.log(response);
   return response;
-  
+   
 }
 
 
